@@ -16,13 +16,17 @@ public class Session {
     @Id
     @Column(nullable = false, name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+
     @Column(nullable = false, name = "INSTANCE_GAME")
     private Long instanceGameId;
+
     @Column(nullable = false, name = "START_TIME")
     private LocalDateTime startTime;
+
     @Column(nullable = false, name = "END_TIME")
     private LocalDateTime endTime;
+
     @Column(nullable = false, name = "IS_OPEN")
     private Boolean ouvert;
 }

@@ -5,14 +5,16 @@ import cm.connect.technology.scratchcard.dto.CreateSessionDto;
 import cm.connect.technology.scratchcard.dto.ResponseDto;
 import cm.connect.technology.scratchcard.entities.ScratchFormatGain;
 import cm.connect.technology.scratchcard.entities.ScratchInstanceGame;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
 @RestController
-@RequestMapping("/api/scratchInstanceGame")
+@RequestMapping("api/scratchInstanceGame")
 //@Api(value = "Endpoints to manage ScratchInstanceGame", tags = "ScratchInstanceGame RestController")
 public interface ScratchInstanceGameController {
     @GetMapping(value = "/getAll")
@@ -37,17 +39,22 @@ public interface ScratchInstanceGameController {
             @RequestHeader(name = "Accept-Language", required = false) Locale locale,
             @PathVariable("name") String name
     );
-   // @ApiOperation("Endpoint to get an existing scratchInstanceGame by startDate")
-    @GetMapping("/startDate/{startDate}")
-    ResponseDto<ScratchInstanceGame> getByStartDate(
-            @RequestHeader(name = "Accept-Language", required = false) Locale locale,
-            @PathVariable("startDate") String name
-    );
-   // @ApiOperation("Endpoint to get an existing scratchInstanceGame by endDate")
-    @GetMapping("/endDate/{endDate}")
-    ResponseDto<ScratchInstanceGame> getByEndDate(
-            @RequestHeader(name = "Accept-Language", required = false) Locale locale,
-            @PathVariable("endDate") ScratchInstanceGame instanceGame
-    );
+
+
+
+    @PostMapping("/startDate/{startDate}")
+    ResponseDto<ScratchInstanceGame> getByStartDate(@RequestHeader(name = "Accept-Language", required = false) Locale locale,
+                                                    @PathVariable("startDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start);
+    @PostMapping("/endDate/{endDate}")
+    ResponseDto<ScratchInstanceGame> getByEndDate(@RequestHeader(name = "Accept-Language", required = false) Locale locale,
+                                                  @PathVariable("endDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end);
+    @PostMapping("/endSession/{startDate}")
+    ResponseDto<ScratchInstanceGame> desactiveSession(@RequestHeader(name = "Accept-Language", required = false) Locale locale,
+                                                    @PathVariable("startDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start);
+
+
+
+
+
 
 }

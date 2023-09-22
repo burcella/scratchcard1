@@ -25,4 +25,5 @@ public class Ticket implements Serializable {
     private StatusTicketEnum status;
     private Boolean isUse;
     private  double amount; // prix du ticket
+
 }

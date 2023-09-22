@@ -3,21 +3,20 @@ package cm.connect.technology.scratchcard.Web.Impl;
 import cm.connect.technology.scratchcard.Web.ScratchInstanceGameController;
 import cm.connect.technology.scratchcard.dto.CreateGameDto;
 import cm.connect.technology.scratchcard.dto.ResponseDto;
-import cm.connect.technology.scratchcard.entities.ScratchFormatGain;
 import cm.connect.technology.scratchcard.entities.ScratchInstanceGame;
 import cm.connect.technology.scratchcard.services.ScratchInstanceGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 
 @Component
 public class ScratchInstanceGameControllerImpl implements ScratchInstanceGameController {
 
-   @Autowired
+    @Autowired
     ScratchInstanceGameService service;
-
 
 
     @Override
@@ -35,13 +34,26 @@ public class ScratchInstanceGameControllerImpl implements ScratchInstanceGameCon
         return service.findInstanceByName(name, locale);
     }
 
+
     @Override
-    public ResponseDto<ScratchInstanceGame> getByStartDate(Locale locale, String name) {
-        return service.startInstance(name, locale);
+    public ResponseDto<ScratchInstanceGame> getByStartDate(Locale locale, LocalDateTime startDate) {
+        return service.startInstance(startDate, locale);
     }
 
     @Override
-    public ResponseDto<ScratchInstanceGame> getByEndDate(Locale locale, ScratchInstanceGame instanceGame) {
-        return service.endInstance(instanceGame, locale);
+    public ResponseDto<ScratchInstanceGame> getByEndDate(Locale locale, LocalDateTime end) {
+        return service.endInstance(end, locale);
+    }
+
+    @Override
+    public ResponseDto<ScratchInstanceGame> desactiveSession(Locale locale, LocalDateTime start) {
+        return service.desactiveSession(start,locale);
     }
 }
+
+    //  @Override
+  //  public ResponseDto<ScratchInstanceGame> getByStartDate(Locale locale, String name) {
+   //     return service.startInstance(name, locale);
+   // }
+
+
